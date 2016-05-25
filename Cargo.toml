@@ -1,0 +1,6 @@
+[package]
+name = "fdupes"
+version = "0.1.0"
+authors = ["Aleksandr Pak <alekspak@icloud.com>"]
+
+[dependencies]
