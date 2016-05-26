@@ -55,17 +55,14 @@ fn calculate_hash(file: &mut File, buffer: &mut [u8]) -> Result<(usize, [u8; 16]
 
 fn add_to_group(groups: &mut Vec<Vec<PathBuf>>, path: PathBuf) {
     // TODO: Parallel comparison in the end?
-    if groups.len() == 0 {
-        groups.push(vec![path]);
-        return;
-    }
-
-    for group in groups {
+    for group in groups.as_mut_slice() {
         if are_same_bytes(&group[0], &path) {
             group.push(path);
-            break;
+            return;
         }
     }
+
+    groups.push(vec![path]);
 }
 
 fn are_same_bytes(path1: &PathBuf, path2: &PathBuf) -> bool {
